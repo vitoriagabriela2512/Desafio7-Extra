@@ -1,12 +1,11 @@
-<?php require_once("Desempenha.php"); ?>
+<?php require_once("Sistema.php"); ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Desempenho de Vendas</title>
-
-      <style>
+    <title>Sistema de Login</title>
+    <style>
      /* RESET */
 * {
     margin: 0;
@@ -17,7 +16,7 @@
 /* BODY */
 body {
     font-family: 'Segoe UI', Arial, sans-serif;
-    background: linear-gradient(to right, #d0e6f8, #f0f8ff);
+  background: linear-gradient(to right, #d0e6f8, #f0f8ff);
     color: #222;
     display: flex;
     justify-content: center;
@@ -104,28 +103,26 @@ button:hover {
 <body>
 
 <div class="container">
-    <h2>Desempenho de Vendas</h2>
+    <h2>Login</h2>
 
     <form method="post">
-        <input type="text" name="nome" placeholder="Nome do vendedor" required>
-        <input type="number" step="0.1" name="salario" placeholder="Salário base" required>
-        <input type="number" step="0.1" name="vendas" placeholder="Total de vendas" required>
-        <input type="number" step="0.1" name="meta" placeholder="Meta de vendas" required>
+        <input type="text" name="usuario" placeholder="Usuário" required>
+        <input type="password" name="senha" placeholder="Senha" required>
 
-        <button type="submit">Calcular</button>
+        <button type="submit">Entrar</button>
     </form>
 
     <div class="resultado">
         <?php
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            $vendedor = new Desempenha(
-                $_POST['nome'],
-                (float)$_POST['salario'],
-                (float)$_POST['vendas']
-            );
+            // usuário e senha cadastrados
+            $login = new Sistema("vitoria", "1234");
 
-            $vendedor->exibirContraCheque((float)$_POST['meta']);
+            $login->exibirStatus(
+                $_POST['usuario'],
+                $_POST['senha']
+            );
         }
         ?>
     </div>
